@@ -15,8 +15,50 @@
   </head>
   <body>
     <div class="container">
-      <h1>Hello</h1>
-      <a href="" class="btn btn-primary">Click Me</a>
+      <div class="weather-app">
+        <header>Tuesday November 16, 2021 21:43</header>
+        <form>
+          <input
+            type="text"
+            placeholder="Enter City"
+            autocomplete="off"
+            autofocus="on"
+          /><input type="submit" value="search" />
+        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li>
+                <h1>Toronto</h1>
+              </li>
+              <li>Wind: 13km/hr</li>
+              <li>Humidity: 70%</li>
+              <li>High/Low: 20°C/9°C</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li>Currently</li>
+              <li>
+                <h1>
+                  <img
+                    src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                    alt="sunny"
+                  />9°C | 20°F
+                </h1>
+              </li>
+              <li>Sunny</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <small>
+        <a
+          href="https://github.com/neecolacodes/vanilla-weather-app"
+          target="_blank"
+          >Open-source code</a
+        >, by Nicole Cybulski
+      </small>
     </div>
     <script src="src/app.js"></script>
   </body>
