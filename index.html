@@ -15,64 +15,75 @@
   </head>
   <body>
     <div class="container">
-      <div class="weather-app">
-        <header>Tuesday November 16, 2021 21:43</header>
-        <br />
-        <form id="search-form" class="mb-3">
-          <div class="row">
-            <div class="col-9">
-              <input
-                type="search"
-                placeholder="Enter City"
-                class="form-control"
-                id="city-input"
-                autocomplete="off"
-                autofocus="on"
-              />
-            </div>
-            <div class="col-3">
-              <input
-                type="submit"
-                value="Search"
-                class="btn btn-secondary w-100"
-              />
-            </div>
-          </div>
-        </form>
-        <div class="row">
-          <div class="col-md-6">
-            <ul>
-              <li>
-                <h1>Toronto</h1>
-              </li>
-              <li>Wind: 13km/hr</li>
-              <li>Humidity: 70%</li>
-              <li>High/Low: 20°C/9°C</li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <ul>
-              <li>
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                  alt="sunny"
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <header>Tuesday November 16, 2021 21:43</header>
+          <br />
+          <form id="search-form" class="mb-3">
+            <div class="row">
+              <div class="col-9">
+                <input
+                  type="search"
+                  placeholder="Enter City"
+                  class="form-control"
+                  id="city-input"
+                  autocomplete="off"
+                  autofocus="on"
                 />
-              </li>
-              <li>
-                <h3>9°C | 20°F</h3>
-              </li>
-              <li>Sunny</li>
-            </ul>
+              </div>
+              <div class="col-3">
+                <input
+                  type="submit"
+                  value="Search"
+                  class="btn btn-secondary w-100"
+                />
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-md-6">
+              <ul>
+                <li>
+                  <h1>Toronto</h1>
+                </li>
+                <li>Wind: 13km/hr</li>
+                <li>Humidity: 70%</li>
+                <li>
+                  High/Low: 20<span class="high-low-units">°C</span>/9<span
+                    class="high-low-units"
+                    >°C</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="weather-temperature">
+                <li>
+                  <img
+                    src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                    alt="sunny"
+                    class="center"
+                  />
+                </li>
+                <li>
+                  <strong>9</strong
+                  ><span class="units"
+                    ><a href="#">°C</a> | <a href="#">°F</a></span
+                  >
+                </li>
+                <li class="text-center">Sunny</li>
+              </ul>
+            </div>
           </div>
         </div>
+        <small>
+          <a
+            href="https://github.com/neecolacodes/vanilla-weather-app"
+            target="_blank"
+            >Open-source code</a
+          >, by Nicole Cybulski
+        </small>
       </div>
-      <small>
-        <a
-          href="https://github.com/neecolacodes/vanilla-weather-app"
-          target="_blank"
-          >Open-source code</a
-        >, by Nicole Cybulski
-      </small>
     </div>
     <script src="src/app.js"></script>
   </body>
