@@ -9,6 +9,8 @@ header {
 }
 li {
   list-style: none;
+}
+li::first-letter {
   text-transform: capitalize;
 }
 h1,
