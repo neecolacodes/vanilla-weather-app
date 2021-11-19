@@ -10,6 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
     <title>Weather App</title>
   </head>
@@ -40,14 +41,19 @@
               </div>
             </div>
           </form>
+          <div class="d-grid gap-2 col-4 mx-auto">
+            <button type="button" class="btn btn-secondary btn-sm">
+              Current Location Weather
+            </button>
+          </div>
           <div class="row">
             <div class="col-md-6">
               <ul>
                 <li>
-                  <h1>Toronto</h1>
+                  <h1 id="city"></h1>
                 </li>
-                <li>Wind: 13km/hr</li>
-                <li>Humidity: 70%</li>
+                <li>Wind: <span id="wind"></span> km/hr</li>
+                <li>Humidity: <span id="humidity"></span>%</li>
                 <li>
                   High/Low: 20<span class="high-low-units">°C</span>/9<span
                     class="high-low-units"
@@ -66,12 +72,12 @@
                   />
                 </li>
                 <li>
-                  <strong>9</strong
+                  <strong id="temperature"></strong
                   ><span class="units"
                     ><a href="#">°C</a> | <a href="#">°F</a></span
                   >
                 </li>
-                <li class="text-center">Sunny</li>
+                <li class="text-center" id="description"></li>
               </ul>
             </div>
           </div>

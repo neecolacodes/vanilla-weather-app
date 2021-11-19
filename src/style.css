@@ -3,13 +3,13 @@ body {
 }
 header {
   display: block;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 100;
-  line-height: 19px;
+  line-height: 5px;
 }
-
 li {
   list-style: none;
+  text-transform: capitalize;
 }
 h1,
 strong {
