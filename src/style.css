@@ -47,6 +47,14 @@ strong {
   font-size: 14px;
   top: -24px;
 }
+.weather-temperature .active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
+.weather-temperature .active:hover {
+  text-decoration: none;
+}
 .high-low-units {
   position: relative;
   font-size: 10px;

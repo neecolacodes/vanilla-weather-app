@@ -49,7 +49,10 @@ function displayTemperature(response) {
   let iconElement = document.querySelector("#icon");
   let highElement = document.querySelector("#high");
   let lowElement = document.querySelector("#low");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+
+  celsiusTemperature = response.data.main.temp;
+
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
@@ -76,7 +79,53 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-search("Toronto");
+function currentLocationTemp() {
+  {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+  function showPosition(position) {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    let apiKey = "49cb7b6601adf66f3ce54eb040e3a0ba";
+    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
+    let location = document.querySelector("#city");
+    location.innerHTML = `Latitude: ${latitude} Longitude: ${longitude}`;
+    axios
+      .get(
+        `${apiUrl}lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
+      )
+      .then(displayTemperature);
+  }
+}
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", currentLocationTemp);
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+search("Toronto");

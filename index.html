@@ -42,7 +42,11 @@
             </div>
           </form>
           <div class="d-grid gap-2 col-4 mx-auto">
-            <button type="button" class="btn btn-secondary btn-sm mb-2">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm mb-2"
+              id="current-location-button"
+            >
               Current Location Weather
             </button>
           </div>
@@ -74,7 +78,8 @@
                 <li>
                   <strong id="temperature"></strong
                   ><span class="units"
-                    ><a href="#">°C</a> | <a href="#">°F</a></span
+                    ><a href="#" class="active" id="celsius-link">°C</a> |
+                    <a href="#" id="fahrenheit-link">°F</a></span
                   >
                 </li>
                 <li class="text-center" id="description"></li>
