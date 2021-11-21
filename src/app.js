@@ -51,6 +51,8 @@ function displayTemperature(response) {
   let lowElement = document.querySelector("#low");
 
   celsiusTemperature = response.data.main.temp;
+  highCelsiusTemperature = response.data.main.temp_max;
+  lowCelsiusTemperature = response.data.main.temp_min;
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
@@ -63,8 +65,8 @@ function displayTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
-  highElement.innerHTML = Math.round(response.data.main.temp_max);
-  lowElement.innerHTML = Math.round(response.data.main.temp_min);
+  highElement.innerHTML = Math.round(highCelsiusTemperature);
+  lowElement.innerHTML = Math.round(lowCelsiusTemperature);
 }
 
 function search(city) {
@@ -98,35 +100,43 @@ function currentLocationTemp() {
   }
 }
 function displayFahrenheitTemperature(event) {
-  {
-    event.preventDefault();
-    let temperatureElement = document.querySelector("#temperature");
-    celsiusLink.classList.remove("active");
-    fahrenheitLink.classList.add("active");
-    let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-  }
-  function displayFarhenheitHighLow(event) {
-    event.preventDefault();
-    let highElement = document.querySelector("#high");
-    let highFahrenheitTemperature = (response.data.main.temp_max * 9) / 5 + 32;
-    highElement.innerHTML = Math.round(highFahrenheitTemperature);
-
-    let lowElement = document.querySelector("#low");
-    let lowFahrenheitTemperature = (response.data.main.temp_min * 9) / 5 + 32;
-    lowElement.innerHTML = Math.round(lowFahrenheitTemperature);
-  }
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let highElement = document.querySelector("#high");
+  let lowElement = document.querySelector("#low");
+  let highUnit = document.querySelector("#high-unit");
+  let lowUnit = document.querySelector("#low-unit");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let highFahrenheitTemperature = (highCelsiusTemperature * 9) / 5 + 32;
+  let lowFahrenheitTemperature = (lowCelsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  highElement.innerHTML = Math.round(highFahrenheitTemperature);
+  lowElement.innerHTML = Math.round(lowFahrenheitTemperature);
+  highUnit.innerHTML = "°F";
+  lowUnit.innerHTML = "°F";
 }
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
+  let highElement = document.querySelector("#high");
+  let lowElement = document.querySelector("#low");
+  let highUnit = document.querySelector("#high-unit");
+  let lowUnit = document.querySelector("#low-unit");
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  highElement.innerHTML = Math.round(highCelsiusTemperature);
+  lowElement.innerHTML = Math.round(lowCelsiusTemperature);
+  highUnit.innerHTML = "°C";
+  lowUnit.innerHTML = "°C";
 }
 
 let celsiusTemperature = null;
+let lowCelsiusTemperature = null;
+let highCelsiusTemperature = null;
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", currentLocationTemp);
