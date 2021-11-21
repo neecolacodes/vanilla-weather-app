@@ -98,12 +98,24 @@ function currentLocationTemp() {
   }
 }
 function displayFahrenheitTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  {
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#temperature");
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+    let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  }
+  function displayFarhenheitHighLow(event) {
+    event.preventDefault();
+    let highElement = document.querySelector("#high");
+    let highFahrenheitTemperature = (response.data.main.temp_max * 9) / 5 + 32;
+    highElement.innerHTML = Math.round(highFahrenheitTemperature);
+
+    let lowElement = document.querySelector("#low");
+    let lowFahrenheitTemperature = (response.data.main.temp_min * 9) / 5 + 32;
+    lowElement.innerHTML = Math.round(lowFahrenheitTemperature);
+  }
 }
 
 function displayCelsiusTemperature(event) {
