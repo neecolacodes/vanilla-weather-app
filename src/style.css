@@ -60,3 +60,17 @@ strong {
   font-size: 10px;
   top: -5px;
 }
+ul.forcast-layout {
+  padding-left: 0;
+  padding-bottom: 0px;
+  text-align: center;
+  background-color: rgba (225, 225, 225, 0.5);
+}
+ul.forcast-layout > li {
+  display: inline-block;
+  padding: 10px 20px 0px;
+}
+ul.day-forcast {
+  padding-left: 0;
+  text-align: center;
+}
