@@ -69,6 +69,41 @@ function displayTemperature(response) {
   lowElement.innerHTML = Math.round(lowCelsiusTemperature);
 }
 
+function displayForcast() {
+  let forcastElement = document.querySelector("#forcast");
+
+  let days = ["Mon", "Tue", "Wed", "Thurs", "Fri"];
+  let forcastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `<div class="col">
+    <ul class="forcast-layout">
+      <li>
+        ${day}
+        <ul class="day-forcast">
+          <li>
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+              alt="sunny"
+              width="30%"
+              class="forcast-icon"
+            />
+          </li>
+          <li class="forcast-temperatures">
+            <span class="forcast-high">18</span>°
+            <span class="forcast-low">12</span>°
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  `;
+  });
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+}
+
 function search(city) {
   let apiKey = "49cb7b6601adf66f3ce54eb040e3a0ba";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -151,3 +186,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Toronto");
+displayForcast();
