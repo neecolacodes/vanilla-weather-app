@@ -39,6 +39,12 @@ function formatDate(timestamp) {
   return `${day} ${month} ${dates}, ${year} ${hours}:${minutes}`;
 }
 
+function getForcast(coordinates) {
+  let apiKey = "49cb7b6601adf66f3ce54eb040e3a0ba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForcast);
+}
+
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -67,12 +73,16 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
   highElement.innerHTML = Math.round(highCelsiusTemperature);
   lowElement.innerHTML = Math.round(lowCelsiusTemperature);
+
+  getForcast(response.data.coord);
 }
 
-function displayForcast() {
+function displayForcast(response) {
+  console.log(response.data.daily);
   let forcastElement = document.querySelector("#forcast");
 
   let days = ["Mon", "Tue", "Wed", "Thurs", "Fri"];
+
   let forcastHTML = `<div class="row">`;
   days.forEach(function (day) {
     forcastHTML =
@@ -186,4 +196,3 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Toronto");
-displayForcast();
