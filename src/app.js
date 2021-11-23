@@ -39,6 +39,55 @@ function formatDate(timestamp) {
   return `${day} ${month} ${dates}, ${year} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForcast(response) {
+  let forcast = response.data.daily;
+
+  let forcastElement = document.querySelector("#forcast");
+
+  let forcastHTML = `<div class="row">`;
+  forcast.forEach(function (forcastDay, index) {
+    if (index < 5) {
+      forcastHTML =
+        forcastHTML +
+        `<div class="col">
+    <ul class="forcast-layout">
+      <li>
+        ${formatDay(forcastDay.dt)}
+        <ul class="day-forcast">
+          <li>
+            <img
+              src="http://openweathermap.org/img/wn/${
+                forcastDay.weather[0].icon
+              }@2x.png"
+              alt=""
+              class="forcast-icon"
+            />
+          </li>
+          <li class="forcast-temperatures">
+            <span class="forcast-high">${Math.round(
+              forcastDay.temp.max
+            )}</span>°
+            <span class="forcast-low">${Math.round(forcastDay.temp.min)}</span>°
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  `;
+    }
+  });
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+}
+
 function getForcast(coordinates) {
   let apiKey = "49cb7b6601adf66f3ce54eb040e3a0ba";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
@@ -75,43 +124,6 @@ function displayTemperature(response) {
   lowElement.innerHTML = Math.round(lowCelsiusTemperature);
 
   getForcast(response.data.coord);
-}
-
-function displayForcast(response) {
-  console.log(response.data.daily);
-  let forcastElement = document.querySelector("#forcast");
-
-  let days = ["Mon", "Tue", "Wed", "Thurs", "Fri"];
-
-  let forcastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forcastHTML =
-      forcastHTML +
-      `<div class="col">
-    <ul class="forcast-layout">
-      <li>
-        ${day}
-        <ul class="day-forcast">
-          <li>
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-              alt="sunny"
-              width="30%"
-              class="forcast-icon"
-            />
-          </li>
-          <li class="forcast-temperatures">
-            <span class="forcast-high">18</span>°
-            <span class="forcast-low">12</span>°
-          </li>
-        </ul>
-      </li>
-    </ul>
-    </div>
-  `;
-  });
-  forcastHTML = forcastHTML + `</div>`;
-  forcastElement.innerHTML = forcastHTML;
 }
 
 function search(city) {

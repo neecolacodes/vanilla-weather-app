@@ -65,7 +65,7 @@ ul.forcast-layout {
   padding-bottom: 0px;
   margin-bottom: 0;
   text-align: center;
-  background-color: rgba(225, 225, 225, 0.767);
+  background-color: rgba(225, 225, 225, 0.8);
 }
 ul.forcast-layout > li {
   display: inline-block;
@@ -88,5 +88,8 @@ ul.day-forcast {
   display: block;
   margin: 0 auto;
   margin-bottom: 5px;
-  width: 40%;
+  width: 50%;
+}
+div.col {
+  padding: 0px;
 }
