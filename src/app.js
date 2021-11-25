@@ -104,6 +104,7 @@ function displayTemperature(response) {
   let iconElement = document.querySelector("#icon");
   let highElement = document.querySelector("#high");
   let lowElement = document.querySelector("#low");
+  let backgroundElement = document.body.style.backgroundImage;
 
   celsiusTemperature = response.data.main.temp;
   highCelsiusTemperature = response.data.main.temp_max;
@@ -122,6 +123,20 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
   highElement.innerHTML = Math.round(highCelsiusTemperature);
   lowElement.innerHTML = Math.round(lowCelsiusTemperature);
+
+  if (response.data.weather[0].main === "clear sky") {
+    {
+      backgroundElement.setAttribute("url", "../images/white-sunshine.jpg");
+    }
+    if (response.data.weather[0].main === "snow") {
+      backgroundElement.setAttribute("url('../images/white-snow.jpg')");
+    }
+    if (response.data.weather[0].main === "thunderstorm, drizzle, rain") {
+      backgroundElement.setAttribute("url('../images/white-dew.jpg')");
+    } else {
+      backgroundElement.setAttribute("url('../images/white-cloud.jpg')");
+    }
+  }
 
   getForcast(response.data.coord);
 }
