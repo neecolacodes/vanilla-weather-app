@@ -54,7 +54,7 @@ function displayForcast(response) {
 
   let forcastHTML = `<div class="row">`;
   forcast.forEach(function (forcastDay, index) {
-    if (index < 5) {
+    if (index !== 0 && index < 6) {
       forcastHTML =
         forcastHTML +
         `<div class="col">
@@ -104,7 +104,6 @@ function displayTemperature(response) {
   let iconElement = document.querySelector("#icon");
   let highElement = document.querySelector("#high");
   let lowElement = document.querySelector("#low");
-  let backgroundElement = document.body.style.backgroundImage;
 
   celsiusTemperature = response.data.main.temp;
   highCelsiusTemperature = response.data.main.temp_max;
@@ -124,20 +123,19 @@ function displayTemperature(response) {
   highElement.innerHTML = Math.round(highCelsiusTemperature);
   lowElement.innerHTML = Math.round(lowCelsiusTemperature);
 
-  if (response.data.weather[0].main === "clear sky") {
-    {
-      backgroundElement.setAttribute("url", "../images/white-sunshine.jpg");
-    }
-    if (response.data.weather[0].main === "snow") {
-      backgroundElement.setAttribute("url('../images/white-snow.jpg')");
-    }
-    if (response.data.weather[0].main === "thunderstorm, drizzle, rain") {
-      backgroundElement.setAttribute("url('../images/white-dew.jpg')");
-    } else {
-      backgroundElement.setAttribute("url('../images/white-cloud.jpg')");
-    }
+  if (response.data.weather[0].description === "clear sky") {
+    document.body.style.backgroundImage = "url('images/white-sunshine.jpg')";
+  } else if (response.data.weather[0].description === "snow") {
+    document.body.style.backgroundImage = "url('images/white-snow.jpg')";
+  } else if (
+    response.data.weather[0].description === "thunderstorm" ||
+    "drizzle" ||
+    "rain"
+  ) {
+    document.body.style.backgroundImage = "url('images/white-dew.jpg')";
+  } else {
+    document.body.style.backgroundImage = "url('images/white-cloud.jpg')";
   }
-
   getForcast(response.data.coord);
 }
 
