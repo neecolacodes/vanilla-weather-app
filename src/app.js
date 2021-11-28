@@ -74,8 +74,10 @@ function displayForcast(response) {
           <li class="forcast-temperatures">
             <span class="forcast-high">${Math.round(
               forcastDay.temp.max
-            )}</span>°
-            <span class="forcast-low">${Math.round(forcastDay.temp.min)}</span>°
+            )}</span><span class="high-low-units">°C</span>
+            <span class="forcast-low">${Math.round(
+              forcastDay.temp.min
+            )}</span><span class="high-low-units">°C</span>
           </li>
         </ul>
       </li>
@@ -129,11 +131,11 @@ function displayTemperature(response) {
     document.body.style.backgroundImage = "url('images/white-snow.jpg')";
   } else if (
     response.data.weather[0].description === "thunderstorm" ||
-    "drizzle" ||
-    "rain"
+    response.data.weather[0].description === "drizzle" ||
+    response.data.weather[0].description === "rain"
   ) {
     document.body.style.backgroundImage = "url('images/white-dew.jpg')";
-  } else {
+  } else if (response.data.weather[0].description === undefined) {
     document.body.style.backgroundImage = "url('images/white-cloud.jpg')";
   }
   getForcast(response.data.coord);
@@ -172,41 +174,21 @@ function currentLocationTemp() {
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  let highElement = document.querySelector("#high");
-  let lowElement = document.querySelector("#low");
-  let highUnit = document.querySelector("#high-unit");
-  let lowUnit = document.querySelector("#low-unit");
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let highFahrenheitTemperature = (highCelsiusTemperature * 9) / 5 + 32;
-  let lowFahrenheitTemperature = (lowCelsiusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-  highElement.innerHTML = Math.round(highFahrenheitTemperature);
-  lowElement.innerHTML = Math.round(lowFahrenheitTemperature);
-  highUnit.innerHTML = "°F";
-  lowUnit.innerHTML = "°F";
 }
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  let highElement = document.querySelector("#high");
-  let lowElement = document.querySelector("#low");
-  let highUnit = document.querySelector("#high-unit");
-  let lowUnit = document.querySelector("#low-unit");
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
-  highElement.innerHTML = Math.round(highCelsiusTemperature);
-  lowElement.innerHTML = Math.round(lowCelsiusTemperature);
-  highUnit.innerHTML = "°C";
-  lowUnit.innerHTML = "°C";
 }
 
 let celsiusTemperature = null;
-let lowCelsiusTemperature = null;
-let highCelsiusTemperature = null;
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", currentLocationTemp);
