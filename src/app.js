@@ -135,7 +135,7 @@ function displayTemperature(response) {
     response.data.weather[0].description === "rain"
   ) {
     document.body.style.backgroundImage = "url('images/white-dew.jpg')";
-  } else if (response.data.weather[0].description === undefined) {
+  } else {
     document.body.style.backgroundImage = "url('images/white-cloud.jpg')";
   }
   getForcast(response.data.coord);
